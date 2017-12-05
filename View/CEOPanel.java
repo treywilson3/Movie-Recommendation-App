@@ -930,7 +930,7 @@ public class CEOPanel extends JPanel {
 	}
 
 	/**
-	 * @author Trey If submit button is pressed, then the correct Database
+	 * @author Trey If submit button is pressed, then the correct DatabaseModel
 	 *         method will be called to enter the database information If not
 	 *         submit button, then the correct method will be called
 	 */
@@ -987,7 +987,7 @@ public class CEOPanel extends JPanel {
 					String movieIDFinal = getAllMovies().getValueAt(getAllMovies().getSelectedRow(), 0).toString();
 					ceoFunctions.deleteMovie(movieIDFinal);
 					((DefaultTableModel) getAllMovies().getModel()).removeRow(getAllMovies().getSelectedRow());
-					confirmMessage(movieIDFinal + " has been removed from the Company Database");
+					confirmMessage(movieIDFinal + " has been removed from the Company DatabaseModel");
 				}
 			} else if (e.getSource() == addMember) {
 				addMember();
@@ -1026,7 +1026,7 @@ public class CEOPanel extends JPanel {
 					int memberID = (int) getAllMembers().getValueAt(getAllMembers().getSelectedRow(), 0);
 					ceoFunctions.deleteMember(memberID);
 					((DefaultTableModel) getAllMembers().getModel()).removeRow(getAllMembers().getSelectedRow());
-					confirmMessage(memberID + " has been removed from the Company Database");
+					confirmMessage(memberID + " has been removed from the Company DatabaseModel");
 				}
 			} else if (e.getSource() == addEmployee) {
 				addEmployee();
@@ -1065,7 +1065,7 @@ public class CEOPanel extends JPanel {
 					ceoFunctions.deleteEmployee(employeeID);
 					((DefaultTableModel) getAllEmployeesTable().getModel())
 							.removeRow(getAllEmployeesTable().getSelectedRow());
-					confirmMessage(employeeID + " has been removed from the Company Database");
+					confirmMessage(employeeID + " has been removed from the Company DatabaseModel");
 				}
 			} else if (e.getSource() == addActorButton) {
 				addActor();
@@ -1096,7 +1096,7 @@ public class CEOPanel extends JPanel {
 					String actorIDFinal = getAllActors().getValueAt(getAllActors().getSelectedRow(), 0).toString();
 					ceoFunctions.deleteActor(actorIDFinal);
 					((DefaultTableModel) getAllActors().getModel()).removeRow(getAllActors().getSelectedRow());
-					confirmMessage(actorIDFinal + " has been removed from the Company Database");
+					confirmMessage(actorIDFinal + " has been removed from the Company DatabaseModel");
 				}
 			} else if (e.getSource() == updateEmail) {
 				updateEmail();

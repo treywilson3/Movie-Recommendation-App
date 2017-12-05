@@ -634,7 +634,7 @@ public class MemberPanel extends JPanel {
 
 	/**
 	 * @author Trey
-	 * If submit button is pressed, then the correct Database
+	 * If submit button is pressed, then the correct DatabaseModel
 	 * method will be called to enter the database information
 	 * If not submit button, then the correct method will be called
 	 */

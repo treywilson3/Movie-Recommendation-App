@@ -11,14 +11,15 @@ import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import Model.Database;
+import Database.DatabaseModel;
+import Database.EmployeeDatabase;
 
 /**
  * @author Trey
  * The NewMemberPanel has all the textfields needed to 
  * make a new account. 
  * The member will enter all their information and this class
- * will call the Database and make a new member
+ * will call the DatabaseModel and make a new member
  */
 public class NewMemberPanel extends JPanel {
 
@@ -202,7 +203,7 @@ public class NewMemberPanel extends JPanel {
 	/**
 	 * @author Trey
 	 * Once submit is pressed, all entered information 
-	 * Will be passed to the Database class to make
+	 * Will be passed to the DatabaseModel class to make
 	 * a new member. 
 	 */
 	public class MyActionListener implements ActionListener {
@@ -219,7 +220,7 @@ public class NewMemberPanel extends JPanel {
 				String stateFinal = (String) addStateText.getText();
 				String zipFinal = (String) addZipText.getText();
 				// call method
-				Database.newUser(email, password, fnameFinal, lnameFinal, phoneFinal, addressFinal, cityFinal,
+				EmployeeDatabase.newUser(email, password, fnameFinal, lnameFinal, phoneFinal, addressFinal, cityFinal,
 						stateFinal, zipFinal);
 				LoginPanel loginPanel = new LoginPanel();
 				removeAll();

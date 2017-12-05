@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
-import Model.Database;
+import Database.VerifyPerson;
 
 /**
  * @author Trey
@@ -94,14 +94,14 @@ public class LoginPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				loginEmail = (String) email.getText();
 				loginPassword = new String(password.getPassword());
-				if (Database.verifiedMember(loginEmail, loginPassword) == true) {
+				if (VerifyPerson.verifyMember(loginEmail, loginPassword) == true) {
 					MemberPanel memberPanel = new MemberPanel(loginEmail, loginPassword);
 					removeAll();
 					repaint();
 					add(memberPanel);
 					revalidate();
-				} else if (Database.verifiedEmployee(loginEmail, loginPassword)) {
-					if (Database.ceo(loginEmail, loginPassword)){
+				} else if (VerifyPerson.verifyEmloyee(loginEmail, loginPassword)) {
+					if (VerifyPerson.verifyCEO(loginEmail, loginPassword)){
 						CEOPanel ceoPanel = new CEOPanel(loginEmail, loginPassword);
 						removeAll();
 						repaint();
