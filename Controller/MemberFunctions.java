@@ -1,6 +1,6 @@
-package Model;
+package Controller;
 
-import Database.MemberDatabase;
+import Model.MemberDatabase;
 import javax.swing.JTable;
 
 public class MemberFunctions {

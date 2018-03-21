@@ -1,12 +1,10 @@
-package Database;
+package Model;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import com.mysql.jdbc.Statement;
 
 public class DatabaseModel {

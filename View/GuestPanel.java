@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import Model.Guest;
+import Controller.Guest;
 
 public class GuestPanel extends JPanel{
 	

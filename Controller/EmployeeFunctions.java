@@ -1,6 +1,6 @@
-package Model;
+package Controller;
 
-import Database.EmployeeDatabase;
+import Model.EmployeeDatabase;
 import javax.swing.JTable;
 
 

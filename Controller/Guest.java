@@ -1,6 +1,6 @@
-package Model;
+package Controller;
 
-import Database.GuestDatabase;
+import Model.GuestDatabase;
 import javax.swing.JTable;
 
 

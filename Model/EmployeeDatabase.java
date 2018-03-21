@@ -1,14 +1,11 @@
-package Database;
+package Model;
 
-import Model.Table;
+import Controller.Table;
 
 import javax.swing.*;
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class EmployeeDatabase extends DatabaseModel {
 

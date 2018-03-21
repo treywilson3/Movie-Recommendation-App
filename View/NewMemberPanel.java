@@ -11,8 +11,8 @@ import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import Database.DatabaseModel;
-import Database.EmployeeDatabase;
+
+import Model.EmployeeDatabase;
 
 /**
  * @author Trey

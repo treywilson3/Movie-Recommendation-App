@@ -1,6 +1,6 @@
-package Model;
+package Controller;
 
-import Database.CEODatabase;
+import Model.CEODatabase;
 import java.math.BigDecimal;
 import javax.swing.JTable;
 

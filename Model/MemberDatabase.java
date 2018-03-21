@@ -1,6 +1,6 @@
-package Database;
+package Model;
 
-import Model.Table;
+import Controller.Table;
 
 import javax.swing.*;
 import java.sql.ResultSet;

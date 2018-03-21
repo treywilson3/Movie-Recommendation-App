@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
-import Database.VerifyPerson;
+import Model.VerifyPerson;
 
 /**
  * @author Trey

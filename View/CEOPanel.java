@@ -5,24 +5,21 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.TextField;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.math.BigDecimal;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
-import Model.CEOFunctions;
+import Controller.CEOFunctions;
+
+package View;
 
 /**
  * @author Trey Employee Panel has all buttons that an amployee will need.
- * 
+ *
  */
 public class CEOPanel extends JPanel {
 
@@ -41,7 +38,7 @@ public class CEOPanel extends JPanel {
 	private JButton employeeInformation;
 	private JButton addEmployee;
 	private JButton deleteEmployee;
-	
+
 	// Add movie
 	private TextField movieIDText;
 	private String movieIDTextPrompt;
@@ -59,17 +56,17 @@ public class CEOPanel extends JPanel {
 	// to delete movie
 	private JTable getAllMovies;
 	private JButton submitDeleteMovie;
-	
-	// Table to present all members and button to 
+
+	// Table to present all members and button to
 	// delete a member
 	private JTable getAllMembers;
 	private JButton submitDeleteMember;
-	
+
 	// Table to present all actors and button to
 	// delete an actor
 	private JTable getAllActors;
 	private JButton submitDeleteActor;
-	
+
 	// Table to present all employees and button to
 	// delete an employee
 	private JTable getAllEmployeesTable;
@@ -152,14 +149,14 @@ public class CEOPanel extends JPanel {
 	private JButton deleteActorButton;
 
 	// Listeners
-	private ActionListener myInnerClass;
-	private FocusListener myFocusListener;
+	private ActionListener onClick;
+	private FocusListener onFocus;
 
 	/**
 	 * Constructor get employee Email and password. See if employee is ceo, if
 	 * ceo, then load ceo page else employee page Ceo also has more functions
 	 * than employee which will be properly opened
-	 * 
+	 *
 	 * @param employeeEmail
 	 * @param employeePassword
 	 */
@@ -169,10 +166,9 @@ public class CEOPanel extends JPanel {
 		setLayout(new GridBagLayout());
 		c = new GridBagConstraints();
 
-		myInnerClass = new MyActionListener();
-		myFocusListener = new MyFocusListener();
-
 		ceoFunctions = new CEOFunctions(employeeEmail, employeePassword);
+		onClick = new Click(this);
+		//onFocus = new Focus(this);
 		ceoPage();
 
 	}
@@ -225,17 +221,17 @@ public class CEOPanel extends JPanel {
 		c.gridy = 0;
 		add(settings, c);
 
-		addMovies.addActionListener(myInnerClass);
-		addMembers.addActionListener(myInnerClass);
-		addActors.addActionListener(myInnerClass);
-		addEmployees.addActionListener(myInnerClass);
-		settings.addActionListener(myInnerClass);
+		addMovies.addActionListener(onClick);
+		addMembers.addActionListener(onClick);
+		addActors.addActionListener(onClick);
+		addEmployees.addActionListener(onClick);
+		settings.addActionListener(onClick);
 
 	}
 
 	/**
 	 * Take ceo or employee back to their home page
-	 * 
+	 *
 	 * @param text
 	 */
 	public void homeButton(String text) {
@@ -260,7 +256,7 @@ public class CEOPanel extends JPanel {
 		c.gridy = 1;
 		add(homeButton, c);
 
-		homeButton.addActionListener(myInnerClass);
+		homeButton.addActionListener(onClick);
 
 	}
 
@@ -288,8 +284,8 @@ public class CEOPanel extends JPanel {
 		c.gridy = 0;
 		add(deleteMovie, c);
 
-		addMovie.addActionListener(myInnerClass);
-		deleteMovie.addActionListener(myInnerClass);
+		addMovie.addActionListener(onClick);
+		deleteMovie.addActionListener(onClick);
 
 	}
 
@@ -366,23 +362,23 @@ public class CEOPanel extends JPanel {
 		c.gridy = 5;
 		add(submitAddMovie, c);
 
-		submitAddMovie.addActionListener(myInnerClass);
-		movieIDText.addFocusListener(myFocusListener);
-		movieTitleText.addFocusListener(myFocusListener);
-		movieRatingText.addFocusListener(myFocusListener);
-		movieGenreText.addFocusListener(myFocusListener);
-		movieReleaseDateText.addFocusListener(myFocusListener);
+		submitAddMovie.addActionListener(onClick);
+		movieIDText.addFocusListener(onFocus);
+		movieTitleText.addFocusListener(onFocus);
+		movieRatingText.addFocusListener(onFocus);
+		movieGenreText.addFocusListener(onFocus);
+		movieReleaseDateText.addFocusListener(onFocus);
 	}
 
 	/**
 	 * textfield and enter information to delete movie
-	 * 
+	 *
 	 * @return
 	 */
 	public JButton deleteMovie() {
 		submitDeleteMovie = new JButton("Delete");
 		add(submitDeleteMovie, c);
-		submitDeleteMovie.addActionListener(myInnerClass);
+		submitDeleteMovie.addActionListener(onClick);
 		return submitDeleteMovie;
 	}
 
@@ -410,8 +406,8 @@ public class CEOPanel extends JPanel {
 		c.gridy = 0;
 		add(deleteMember, c);
 
-		addMember.addActionListener(myInnerClass);
-		deleteMember.addActionListener(myInnerClass);
+		addMember.addActionListener(onClick);
+		deleteMember.addActionListener(onClick);
 	}
 
 	/**
@@ -529,16 +525,16 @@ public class CEOPanel extends JPanel {
 		c.gridy = 9;
 		add(submitAddMember, c);
 
-		submitAddMember.addActionListener(myInnerClass);
-		addMemberEmail.addFocusListener(myFocusListener);
-		addMemberPassword.addFocusListener(myFocusListener);
-		addMemberFirstNameText.addFocusListener(myFocusListener);
-		addMemberLastNameText.addFocusListener(myFocusListener);
-		addPhoneText.addFocusListener(myFocusListener);
-		addAddressText.addFocusListener(myFocusListener);
-		addCityText.addFocusListener(myFocusListener);
-		addStateText.addFocusListener(myFocusListener);
-		addZipText.addFocusListener(myFocusListener);
+		submitAddMember.addActionListener(onClick);
+		addMemberEmail.addFocusListener(onFocus);
+		addMemberPassword.addFocusListener(onFocus);
+		addMemberFirstNameText.addFocusListener(onFocus);
+		addMemberLastNameText.addFocusListener(onFocus);
+		addPhoneText.addFocusListener(onFocus);
+		addAddressText.addFocusListener(onFocus);
+		addCityText.addFocusListener(onFocus);
+		addStateText.addFocusListener(onFocus);
+		addZipText.addFocusListener(onFocus);
 	}
 
 	/**
@@ -547,7 +543,7 @@ public class CEOPanel extends JPanel {
 	public JButton deleteMember() {
 		submitDeleteMember = new JButton("Delete");
 		add(submitDeleteMember, c);
-		submitDeleteMember.addActionListener(myInnerClass);
+		submitDeleteMember.addActionListener(onClick);
 		return submitDeleteMember;
 	}
 
@@ -575,8 +571,8 @@ public class CEOPanel extends JPanel {
 		c.gridy = 0;
 		add(deleteActorButton, c);
 
-		addActorButton.addActionListener(myInnerClass);
-		deleteActorButton.addActionListener(myInnerClass);
+		addActorButton.addActionListener(onClick);
+		deleteActorButton.addActionListener(onClick);
 	}
 
 	/**
@@ -628,10 +624,10 @@ public class CEOPanel extends JPanel {
 		c.gridy = 4;
 		add(submitAddActor, c);
 
-		submitAddActor.addActionListener(myInnerClass);
-		addActorIDText.addFocusListener(myFocusListener);
-		addActorFirstNameText.addFocusListener(myFocusListener);
-		addActorLastNameText.addFocusListener(myFocusListener);
+		submitAddActor.addActionListener(onClick);
+		addActorIDText.addFocusListener(onFocus);
+		addActorFirstNameText.addFocusListener(onFocus);
+		addActorLastNameText.addFocusListener(onFocus);
 	}
 
 	/**
@@ -640,7 +636,7 @@ public class CEOPanel extends JPanel {
 	public JButton deleteActor() {
 		submitDeleteActor = new JButton("Delete");
 		add(submitDeleteActor, c);
-		submitDeleteActor.addActionListener(myInnerClass);
+		submitDeleteActor.addActionListener(onClick);
 		return submitDeleteActor;
 	}
 
@@ -668,8 +664,8 @@ public class CEOPanel extends JPanel {
 		c.gridy = 0;
 		add(deleteEmployee, c);
 
-		addEmployee.addActionListener(myInnerClass);
-		deleteEmployee.addActionListener(myInnerClass);
+		addEmployee.addActionListener(onClick);
+		deleteEmployee.addActionListener(onClick);
 
 	}
 
@@ -777,15 +773,15 @@ public class CEOPanel extends JPanel {
 		c.gridy = 8;
 		add(submitAddEmployee, c);
 
-		submitAddEmployee.addActionListener(myInnerClass);
-		addEmployeeEmail.addFocusListener(myFocusListener);
-		addEmployeePassword.addFocusListener(myFocusListener);
-		addEmployeeFirstNameText.addFocusListener(myFocusListener);
-		addEmployeeLastNameText.addFocusListener(myFocusListener);
-		addHireDateText.addFocusListener(myFocusListener);
-		addJobLocationText.addFocusListener(myFocusListener);
-		addPositionText.addFocusListener(myFocusListener);
-		addSalaryText.addFocusListener(myFocusListener);
+		submitAddEmployee.addActionListener(onClick);
+		addEmployeeEmail.addFocusListener(onFocus);
+		addEmployeePassword.addFocusListener(onFocus);
+		addEmployeeFirstNameText.addFocusListener(onFocus);
+		addEmployeeLastNameText.addFocusListener(onFocus);
+		addHireDateText.addFocusListener(onFocus);
+		addJobLocationText.addFocusListener(onFocus);
+		addPositionText.addFocusListener(onFocus);
+		addSalaryText.addFocusListener(onFocus);
 	}
 
 	/**
@@ -794,7 +790,7 @@ public class CEOPanel extends JPanel {
 	public JButton deleteEmployee() {
 		submitDeleteEmployee = new JButton("Delete");
 		add(submitDeleteEmployee, c);
-		submitDeleteEmployee.addActionListener(myInnerClass);
+		submitDeleteEmployee.addActionListener(onClick);
 		return submitDeleteEmployee;
 	}
 
@@ -830,10 +826,10 @@ public class CEOPanel extends JPanel {
 		c.gridx = 2;
 		c.gridy = 0;
 		add(employeeInformation, c);
-		employeeInformation.addActionListener(myInnerClass);
+		employeeInformation.addActionListener(onClick);
 
-		updateEmail.addActionListener(myInnerClass);
-		updatePassword.addActionListener(myInnerClass);
+		updateEmail.addActionListener(onClick);
+		updatePassword.addActionListener(onClick);
 	}
 
 	/**
@@ -864,8 +860,8 @@ public class CEOPanel extends JPanel {
 		c.gridy = 0;
 		add(submitEmail, c);
 
-		submitEmail.addActionListener(myInnerClass);
-		emailText.addFocusListener(myFocusListener);
+		submitEmail.addActionListener(onClick);
+		emailText.addFocusListener(onFocus);
 	}
 
 	/**
@@ -896,8 +892,8 @@ public class CEOPanel extends JPanel {
 		c.gridy = 0;
 		add(submitPassword, c);
 
-		submitPassword.addActionListener(myInnerClass);
-		passwordText.addFocusListener(myFocusListener);
+		submitPassword.addActionListener(onClick);
+		passwordText.addFocusListener(onFocus);
 	}
 
 	/**
@@ -929,483 +925,739 @@ public class CEOPanel extends JPanel {
 		return getAllActors;
 	}
 
-	/**
-	 * @author Trey If submit button is pressed, then the correct DatabaseModel
-	 *         method will be called to enter the database information If not
-	 *         submit button, then the correct method will be called
-	 */
-	public class MyActionListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == addMovies) {
-				addMoviesPanel();
-			} else if (e.getSource() == addMembers) {
-				addMembersPanel();
-			} else if (e.getSource() == addEmployees) {
-				addEmployeesPanel();
-			} else if (e.getSource() == addActors) {
-				addActorPanel();
-			} else if (e.getSource() == settings) {
-				settingsPanel();
-			} else if (e.getSource() == addMovie) {
-				addMovie();
-			} else if (e.getSource() == employeeInformation) {
-				homeButton("");
-				JTable table = ceoFunctions.getEmployeeInformation();
-				JScrollPane pane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-						JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-				table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
-				add(pane);
-			} else if (e.getSource() == submitAddMovie) {
-				String movieIDFinal = (String) movieIDText.getText();
-				String titleFinal = (String) movieTitleText.getText();
-				String ratingFinal = (String) movieRatingText.getText();
-				String genreFinal = (String) movieGenreText.getText();
-				String releaseDateFinal = (String) movieReleaseDateText.getText();
-				// call employee method
-				ceoFunctions.addMovie(movieIDFinal, titleFinal, ratingFinal, genreFinal, releaseDateFinal);
-				confirmMessage(titleFinal + " has been added");
-				homeButton("");
-			} else if (e.getSource() == deleteMovie) {
-				homeButton("");
-				getAllMovies = ceoFunctions.getAllMovies();
-				JScrollPane pane = new JScrollPane(getAllMovies, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-						JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-				getAllMovies.setAutoResizeMode(getAllMovies.AUTO_RESIZE_OFF);
-				pane.getViewport().setBackground(Color.WHITE);
-				add(pane);
-				c.fill = GridBagConstraints.NONE;
-				c.ipady = 10;
-				c.ipadx = 20;
-				// c.insets = new Insets(0, 20, 20, 0); // side padding
-				c.gridx = 0;
-				c.gridy = 2;
-				add(deleteMovie(), c);
-
-			} else if (e.getSource() == submitDeleteMovie) {
-				if (getAllMovies().getSelectedRow() != -1) {
-					String movieIDFinal = getAllMovies().getValueAt(getAllMovies().getSelectedRow(), 0).toString();
-					ceoFunctions.deleteMovie(movieIDFinal);
-					((DefaultTableModel) getAllMovies().getModel()).removeRow(getAllMovies().getSelectedRow());
-					confirmMessage(movieIDFinal + " has been removed from the Company DatabaseModel");
-				}
-			} else if (e.getSource() == addMember) {
-				addMember();
-			} else if (e.getSource() == submitAddMember) {
-				String memberE = (String) addMemberEmail.getText();
-				String memberP = (String) addMemberPassword.getText();
-				String fnameFinal = (String) addMemberFirstNameText.getText();
-				String lnameFinal = (String) addMemberLastNameText.getText();
-				String phoneFinal = (String) addPhoneText.getText();
-				String addressFinal = (String) addAddressText.getText();
-				String cityFinal = (String) addCityText.getText();
-				String stateFinal = (String) addStateText.getText();
-				String zipFinal = (String) addZipText.getText();
-				// call method
-				ceoFunctions.addMember(memberE, memberP, fnameFinal, lnameFinal, phoneFinal, addressFinal, cityFinal,
-						stateFinal, zipFinal);
-				confirmMessage(fnameFinal + " " + lnameFinal + " has been added");
-				homeButton("");
-			} else if (e.getSource() == deleteMember) {
-				homeButton("");
-				getAllMembers = ceoFunctions.getAllMembers();
-				JScrollPane pane = new JScrollPane(getAllMembers, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-						JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-				getAllMembers.setAutoResizeMode(getAllMembers.AUTO_RESIZE_OFF);
-				pane.getViewport().setBackground(Color.WHITE);
-				add(pane);
-				c.fill = GridBagConstraints.NONE;
-				c.ipady = 10;
-				c.ipadx = 20;
-				// c.insets = new Insets(0, 20, 20, 0); // side padding
-				c.gridx = 0;
-				c.gridy = 2;
-				add(deleteMember(), c);
-			} else if (e.getSource() == submitDeleteMember) {
-				if (getAllMembers().getSelectedRow() != -1) {
-					int memberID = (int) getAllMembers().getValueAt(getAllMembers().getSelectedRow(), 0);
-					ceoFunctions.deleteMember(memberID);
-					((DefaultTableModel) getAllMembers().getModel()).removeRow(getAllMembers().getSelectedRow());
-					confirmMessage(memberID + " has been removed from the Company DatabaseModel");
-				}
-			} else if (e.getSource() == addEmployee) {
-				addEmployee();
-			} else if (e.getSource() == submitAddEmployee) {
-				String email = (String) addEmployeeEmail.getText();
-				String password = (String) addEmployeePassword.getText();
-				String hireDateFinal = (String) addHireDateText.getText();
-				String firstNameFinal = (String) addEmployeeFirstNameText.getText();
-				String lastNameFinal = (String) addEmployeeLastNameText.getText();
-				String jobLocationFinal = (String) addJobLocationText.getText();
-				String positionFinal = (String) addPositionText.getText();
-				String salary = (String) addSalaryText.getText();
-				BigDecimal salaryFinal = new BigDecimal(salary);
-				ceoFunctions.addEmployee(email, password, hireDateFinal, firstNameFinal, lastNameFinal,
-						jobLocationFinal, positionFinal, salaryFinal);
-				confirmMessage(firstNameFinal + " " + lastNameFinal + " has been added");
-				homeButton("");
-			} else if (e.getSource() == deleteEmployee) {
-				homeButton("");
-				getAllEmployeesTable = ceoFunctions.getAllEmployees();
-				JScrollPane pane = new JScrollPane(getAllEmployeesTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-						JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-				getAllEmployeesTable.setAutoResizeMode(getAllEmployeesTable.AUTO_RESIZE_OFF);
-				pane.getViewport().setBackground(Color.WHITE);
-				add(pane);
-				c.fill = GridBagConstraints.NONE;
-				c.ipady = 10;
-				c.ipadx = 20;
-				// c.insets = new Insets(0, 20, 20, 0); // side padding
-				c.gridx = 0;
-				c.gridy = 2;
-				add(deleteEmployee(), c);
-			} else if (e.getSource() == submitDeleteEmployee) {
-				if (getAllEmployeesTable().getSelectedRow() != -1) {
-					int employeeID = (int) getAllEmployeesTable.getValueAt(getAllEmployeesTable().getSelectedRow(), 0);
-					ceoFunctions.deleteEmployee(employeeID);
-					((DefaultTableModel) getAllEmployeesTable().getModel())
-							.removeRow(getAllEmployeesTable().getSelectedRow());
-					confirmMessage(employeeID + " has been removed from the Company DatabaseModel");
-				}
-			} else if (e.getSource() == addActorButton) {
-				addActor();
-			} else if (e.getSource() == deleteActorButton) {
-				homeButton("");
-				getAllActors = ceoFunctions.getAllActors();
-				JScrollPane pane = new JScrollPane(getAllActors, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-						JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-				getAllActors.setAutoResizeMode(getAllActors.AUTO_RESIZE_OFF);
-				pane.getViewport().setBackground(Color.WHITE);
-				add(pane);
-				c.fill = GridBagConstraints.NONE;
-				c.ipady = 10;
-				c.ipadx = 20;
-				// c.insets = new Insets(0, 20, 20, 0); // side padding
-				c.gridx = 0;
-				c.gridy = 2;
-				add(deleteActor(), c);
-			} else if (e.getSource() == submitAddActor) {
-				String actorIDFinal = (String) addActorIDText.getText();
-				String actorFirstNameFinal = (String) addActorFirstNameText.getText();
-				String actorLastNameFinal = (String) addActorLastNameText.getText();
-				ceoFunctions.addActor(actorIDFinal, actorFirstNameFinal, actorLastNameFinal);
-				confirmMessage(actorFirstNameFinal + " " + actorLastNameFinal + " has been added");
-				homeButton("");
-			} else if (e.getSource() == submitDeleteActor) {
-				if (getAllActors().getSelectedRow() != -1) {
-					String actorIDFinal = getAllActors().getValueAt(getAllActors().getSelectedRow(), 0).toString();
-					ceoFunctions.deleteActor(actorIDFinal);
-					((DefaultTableModel) getAllActors().getModel()).removeRow(getAllActors().getSelectedRow());
-					confirmMessage(actorIDFinal + " has been removed from the Company DatabaseModel");
-				}
-			} else if (e.getSource() == updateEmail) {
-				updateEmail();
-			} else if (e.getSource() == submitEmail) {
-				String email = (String) emailText.getText();
-				ceoFunctions.updateEmail(email);
-				confirmMessage("Your email as been updated");
-				homeButton("");
-			} else if (e.getSource() == updatePassword) {
-				updatePassword();
-			} else if (e.getSource() == submitPassword) {
-				String password = (String) passwordText.getText();
-				ceoFunctions.updatePassword(password);
-				confirmMessage("Your password has been updated");
-				homeButton("");
-			} else if (e.getSource() == homeButton) {
-				ceoPage();
-			}
-		}
+	public JButton getAddMembers() {
+		return addMembers;
 	}
 
-	/**
-	 * @author Trey If the textbox is clicked, then set the text to empty so the
-	 *         user doesn't have to clear it. Also, set the text color to black
-	 *         (it was gray for the prompt) that way it is more aesthetically
-	 *         pleasing. If the textbox was clicked in but the user did not type
-	 *         anything, then set the color back to gray and present the prompt.
-	 */
-	public class MyFocusListener implements FocusListener {
-		@Override
-		public void focusGained(FocusEvent e) {
-			if (e.getSource() == addMemberEmail) {
-				addMemberEmail.setForeground(Color.BLACK);
-				if (addMemberEmail.getText().equals(addMemberEmailPrompt)) {
-					addMemberEmail.setText("");
-				}
-			} else if (e.getSource() == addMemberPassword) {
-				addMemberPassword.setForeground(Color.BLACK);
-				if (addMemberPassword.getText().equals(addMemberPasswordPrompt)) {
-					addMemberPassword.setText("");
-				}
-			} else if (e.getSource() == addMemberFirstNameText) {
-				addMemberFirstNameText.setForeground(Color.BLACK);
-				if (addMemberFirstNameText.getText().equals(addMemberFirstNameTextPrompt)) {
-					addMemberFirstNameText.setText("");
-				}
-			} else if (e.getSource() == addMemberLastNameText) {
-				addMemberLastNameText.setForeground(Color.BLACK);
-				if (addMemberLastNameText.getText().equals(addMemberLastNameTextPrompt)) {
-					addMemberLastNameText.setText("");
-				}
-			} else if (e.getSource() == addPhoneText) {
-				addPhoneText.setForeground(Color.BLACK);
-				if (addPhoneText.getText().equals(addPhoneTextPrompt)) {
-					addPhoneText.setText("");
-				}
-			} else if (e.getSource() == addAddressText) {
-				addAddressText.setForeground(Color.BLACK);
-				if (addAddressText.getText().equals(addAddressTextPrompt)) {
-					addAddressText.setText("");
-				}
-			} else if (e.getSource() == addCityText) {
-				addCityText.setForeground(Color.BLACK);
-				if (addCityText.getText().equals(addCityTextPrompt)) {
-					addCityText.setText("");
-				}
-			} else if (e.getSource() == addStateText) {
-				addStateText.setForeground(Color.BLACK);
-				if (addStateText.getText().equals(addStateTextPrompt)) {
-					addStateText.setText("");
-				}
-			} else if (e.getSource() == addZipText) {
-				addZipText.setForeground(Color.BLACK);
-				if (addZipText.getText().equals(addZipTextPrompt)) {
-					addZipText.setText("");
-				}
-			} else if (e.getSource() == movieIDText) {
-				movieIDText.setForeground(Color.BLACK);
-				if (movieIDText.getText().equals(movieIDTextPrompt)) {
-					movieIDText.setText("");
-				}
-			} else if (e.getSource() == movieTitleText) {
-				movieTitleText.setForeground(Color.BLACK);
-				if (movieTitleText.getText().equals(movieTitleTextPrompt)) {
-					movieTitleText.setText("");
-				}
-			} else if (e.getSource() == movieRatingText) {
-				movieRatingText.setForeground(Color.BLACK);
-				if (movieRatingText.getText().equals(movieRatingTextPrompt)) {
-					movieRatingText.setText("");
-				}
-			} else if (e.getSource() == movieGenreText) {
-				movieGenreText.setForeground(Color.BLACK);
-				if (movieGenreText.getText().equals(movieGenreTextPrompt)) {
-					movieGenreText.setText("");
-				}
-			} else if (e.getSource() == movieReleaseDateText) {
-				movieReleaseDateText.setForeground(Color.BLACK);
-				if (movieReleaseDateText.getText().equals(movieReleaseDateTextPrompt)) {
-					movieReleaseDateText.setText("");
-				}
-			} else if (e.getSource() == addEmployeeEmail) {
-				addEmployeeEmail.setForeground(Color.BLACK);
-				if (addEmployeeEmail.getText().equals(addEmployeeEmailPrompt)) {
-					addEmployeeEmail.setText("");
-				}
-			} else if (e.getSource() == addEmployeePassword) {
-				addEmployeePassword.setForeground(Color.BLACK);
-				if (addEmployeePassword.getText().equals(addEmployeePasswordPrompt)) {
-					addEmployeePassword.setText("");
-				}
-			} else if (e.getSource() == addHireDateText) {
-				addHireDateText.setForeground(Color.BLACK);
-				if (addHireDateText.getText().equals(addHireDateTextPrompt)) {
-					addHireDateText.setText("");
-				}
-			} else if (e.getSource() == addEmployeeFirstNameText) {
-				addEmployeeFirstNameText.setForeground(Color.BLACK);
-				if (addEmployeeFirstNameText.getText().equals(addEmployeeFirstNameTextPrompt)) {
-					addEmployeeFirstNameText.setText("");
-				}
-			} else if (e.getSource() == addEmployeeLastNameText) {
-				addEmployeeLastNameText.setForeground(Color.BLACK);
-				if (addEmployeeLastNameText.getText().equals(addEmployeeLastNameTextPrompt)) {
-					addEmployeeLastNameText.setText("");
-				}
-			} else if (e.getSource() == addJobLocationText) {
-				addJobLocationText.setForeground(Color.BLACK);
-				if (addJobLocationText.getText().equals(addJobLocationTextPrompt)) {
-					addJobLocationText.setText("");
-				}
-			} else if (e.getSource() == addPositionText) {
-				addPositionText.setForeground(Color.BLACK);
-				if (addPositionText.getText().equals(addPositionTextPrompt)) {
-					addPositionText.setText("");
-				}
-			} else if (e.getSource() == addSalaryText) {
-				addSalaryText.setForeground(Color.BLACK);
-				if (addSalaryText.getText().equals(addSalaryTextPrompt)) {
-					addSalaryText.setText("");
-				}
-			} else if (e.getSource() == addActorIDText) {
-				addActorIDText.setForeground(Color.BLACK);
-				if (addActorIDText.getText().equals(addActorIDTextPrompt)) {
-					addActorIDText.setText("");
-				}
-			} else if (e.getSource() == addActorFirstNameText) {
-				addActorFirstNameText.setForeground(Color.BLACK);
-				if (addActorFirstNameText.getText().equals(addActorFirstNameTextPrompt)) {
-					addActorFirstNameText.setText("");
-				}
-			} else if (e.getSource() == addActorLastNameText) {
-				addActorLastNameText.setForeground(Color.BLACK);
-				if (addActorLastNameText.getText().equals(addActorLastNameTextPrompt)) {
-					addActorLastNameText.setText("");
-				}
-			} else if (e.getSource() == emailText) {
-				emailText.setForeground(Color.BLACK);
-				if (emailText.getText().equals(emailTextPrompt)) {
-					emailText.setText("");
-				}
-			} else if (e.getSource() == passwordText) {
-				passwordText.setForeground(Color.BLACK);
-				if (passwordText.getText().equals(passwordTextPrompt)) {
-					passwordText.setText("");
-				}
-			}
+	public void setAddMembers(JButton addMembers) {
+		this.addMembers = addMembers;
+	}
 
-		}
+	public JButton getAddMovies() {
+		return addMovies;
+	}
 
-		@Override
-		public void focusLost(FocusEvent e) {
-			if (e.getSource() == addMemberEmail) {
-				if (addMemberEmail.getText().length() == 0) {
-					addMemberEmail.setForeground(Color.GRAY);
-					addMemberEmail.setText(addMemberEmailPrompt);
-				}
-			} else if (e.getSource() == addMemberPassword) {
-				if (addMemberPassword.getText().length() == 0) {
-					addMemberPassword.setForeground(Color.GRAY);
-					addMemberPassword.setText(addMemberPasswordPrompt);
-				}
-			} else if (e.getSource() == addMemberFirstNameText) {
-				if (addMemberFirstNameText.getText().length() == 0) {
-					addMemberFirstNameText.setForeground(Color.GRAY);
-					addMemberFirstNameText.setText(addMemberFirstNameTextPrompt);
-				}
-			} else if (e.getSource() == addMemberLastNameText) {
-				if (addMemberLastNameText.getText().length() == 0) {
-					addMemberLastNameText.setForeground(Color.GRAY);
-					addMemberLastNameText.setText(addMemberLastNameTextPrompt);
-				}
-			} else if (e.getSource() == addPhoneText) {
-				if (addPhoneText.getText().length() == 0) {
-					addPhoneText.setForeground(Color.GRAY);
-					addPhoneText.setText(addPhoneTextPrompt);
-				}
-			} else if (e.getSource() == addAddressText) {
-				if (addAddressText.getText().length() == 0) {
-					addAddressText.setForeground(Color.GRAY);
-					addAddressText.setText(addAddressTextPrompt);
-				}
-			} else if (e.getSource() == addCityText) {
-				if (addCityText.getText().length() == 0) {
-					addCityText.setForeground(Color.GRAY);
-					addCityText.setText(addCityTextPrompt);
-				}
-			} else if (e.getSource() == addStateText) {
-				if (addStateText.getText().length() == 0) {
-					addStateText.setForeground(Color.GRAY);
-					addStateText.setText(addStateTextPrompt);
-				}
-			} else if (e.getSource() == addZipText) {
-				if (addZipText.getText().length() == 0) {
-					addZipText.setForeground(Color.GRAY);
-					addZipText.setText(addZipTextPrompt);
-				}
-			} else if (e.getSource() == movieIDText) {
-				if (movieIDText.getText().length() == 0) {
-					movieIDText.setForeground(Color.GRAY);
-					movieIDText.setText(movieIDTextPrompt);
-				}
-			} else if (e.getSource() == movieTitleText) {
-				if (movieTitleText.getText().length() == 0) {
-					movieTitleText.setForeground(Color.GRAY);
-					movieTitleText.setText(movieTitleTextPrompt);
-				}
-			} else if (e.getSource() == movieRatingText) {
-				if (movieRatingText.getText().length() == 0) {
-					movieRatingText.setForeground(Color.GRAY);
-					movieRatingText.setText(movieRatingTextPrompt);
-				}
-			} else if (e.getSource() == movieGenreText) {
-				if (movieGenreText.getText().length() == 0) {
-					movieGenreText.setForeground(Color.GRAY);
-					movieGenreText.setText(movieGenreTextPrompt);
-				}
-			} else if (e.getSource() == movieReleaseDateText) {
-				if (movieReleaseDateText.getText().length() == 0) {
-					movieReleaseDateText.setForeground(Color.GRAY);
-					movieReleaseDateText.setText(movieReleaseDateTextPrompt);
-				}
-			} else if (e.getSource() == addEmployeeEmail) {
-				if (addEmployeeEmail.getText().length() == 0) {
-					addEmployeeEmail.setForeground(Color.GRAY);
-					addEmployeeEmail.setText(addEmployeeEmailPrompt);
-				}
-			} else if (e.getSource() == addEmployeePassword) {
-				if (addEmployeePassword.getText().length() == 0) {
-					addEmployeePassword.setForeground(Color.GRAY);
-					addEmployeePassword.setText(addEmployeePasswordPrompt);
-				}
-			} else if (e.getSource() == addHireDateText) {
-				if (addHireDateText.getText().length() == 0) {
-					addHireDateText.setForeground(Color.GRAY);
-					addHireDateText.setText(addHireDateTextPrompt);
-				}
-			} else if (e.getSource() == addEmployeeFirstNameText) {
-				if (addEmployeeFirstNameText.getText().length() == 0) {
-					addEmployeeFirstNameText.setForeground(Color.GRAY);
-					addEmployeeFirstNameText.setText(addEmployeeFirstNameTextPrompt);
-				}
-			} else if (e.getSource() == addEmployeeLastNameText) {
-				if (addEmployeeLastNameText.getText().length() == 0) {
-					addEmployeeLastNameText.setForeground(Color.GRAY);
-					addEmployeeLastNameText.setText(addEmployeeLastNameTextPrompt);
-				}
-			} else if (e.getSource() == addJobLocationText) {
-				if (addJobLocationText.getText().length() == 0) {
-					addJobLocationText.setForeground(Color.GRAY);
-					addJobLocationText.setText(addJobLocationTextPrompt);
-				}
-			} else if (e.getSource() == addPositionText) {
-				if (addPositionText.getText().length() == 0) {
-					addPositionText.setForeground(Color.GRAY);
-					addPositionText.setText(addPositionTextPrompt);
-				}
-			} else if (e.getSource() == addSalaryText) {
-				if (addSalaryText.getText().length() == 0) {
-					addSalaryText.setForeground(Color.GRAY);
-					addSalaryText.setText(addSalaryTextPrompt);
-				}
-			} else if (e.getSource() == addActorIDText) {
-				if (addActorIDText.getText().length() == 0) {
-					addActorIDText.setForeground(Color.GRAY);
-					addActorIDText.setText(addActorIDTextPrompt);
-				}
-			} else if (e.getSource() == addActorFirstNameText) {
-				if (addActorFirstNameText.getText().length() == 0) {
-					addActorFirstNameText.setForeground(Color.GRAY);
-					addActorFirstNameText.setText(addActorFirstNameTextPrompt);
-				}
-			} else if (e.getSource() == addActorLastNameText) {
-				if (addActorLastNameText.getText().length() == 0) {
-					addActorLastNameText.setForeground(Color.GRAY);
-					addActorLastNameText.setText(addActorLastNameTextPrompt);
-				}
-			} else if (e.getSource() == emailText) {
-				if (emailText.getText().length() == 0) {
-					emailText.setForeground(Color.GRAY);
-					emailText.setText(emailTextPrompt);
-				}
-			} else if (e.getSource() == passwordText) {
-				if (passwordText.getText().length() == 0) {
-					passwordText.setForeground(Color.GRAY);
-					passwordText.setText(passwordTextPrompt);
-				}
-			}
+	public void setAddMovies(JButton addMovies) {
+		this.addMovies = addMovies;
+	}
 
-		}
+	public JButton getAddEmployees() {
+		return addEmployees;
+	}
+
+	public void setAddEmployees(JButton addEmployees) {
+		this.addEmployees = addEmployees;
+	}
+
+	public JButton getAddActors() {
+		return addActors;
+	}
+
+	public void setAddActors(JButton addActors) {
+		this.addActors = addActors;
+	}
+
+	public JButton getSettings() {
+		return settings;
+	}
+
+	public void setSettings(JButton settings) {
+		this.settings = settings;
+	}
+
+	public JButton getAddMovie() {
+		return addMovie;
+	}
+
+	public void setAddMovie(JButton addMovie) {
+		this.addMovie = addMovie;
+	}
+
+	public JButton getDeleteMovie() {
+		return deleteMovie;
+	}
+
+	public void setDeleteMovie(JButton deleteMovie) {
+		this.deleteMovie = deleteMovie;
+	}
+
+	public JButton getAddMember() {
+		return addMember;
+	}
+
+	public void setAddMember(JButton addMember) {
+		this.addMember = addMember;
+	}
+
+	public JButton getDeleteMember() {
+		return deleteMember;
+	}
+
+	public void setDeleteMember(JButton deleteMember) {
+		this.deleteMember = deleteMember;
+	}
+
+	public JButton getEmployeeInformation() {
+		return employeeInformation;
+	}
+
+	public void setEmployeeInformation(JButton employeeInformation) {
+		this.employeeInformation = employeeInformation;
+	}
+
+	public JButton getAddEmployee() {
+		return addEmployee;
+	}
+
+	public void setAddEmployee(JButton addEmployee) {
+		this.addEmployee = addEmployee;
+	}
+
+	public JButton getDeleteEmployee() {
+		return deleteEmployee;
+	}
+
+	public void setDeleteEmployee(JButton deleteEmployee) {
+		this.deleteEmployee = deleteEmployee;
+	}
+
+	public TextField getMovieIDText() {
+		return movieIDText;
+	}
+
+	public void setMovieIDText(TextField movieIDText) {
+		this.movieIDText = movieIDText;
+	}
+
+	public String getMovieIDTextPrompt() {
+		return movieIDTextPrompt;
+	}
+
+	public void setMovieIDTextPrompt(String movieIDTextPrompt) {
+		this.movieIDTextPrompt = movieIDTextPrompt;
+	}
+
+	public TextField getMovieTitleText() {
+		return movieTitleText;
+	}
+
+	public void setMovieTitleText(TextField movieTitleText) {
+		this.movieTitleText = movieTitleText;
+	}
+
+	public String getMovieTitleTextPrompt() {
+		return movieTitleTextPrompt;
+	}
+
+	public void setMovieTitleTextPrompt(String movieTitleTextPrompt) {
+		this.movieTitleTextPrompt = movieTitleTextPrompt;
+	}
+
+	public TextField getMovieRatingText() {
+		return movieRatingText;
+	}
+
+	public void setMovieRatingText(TextField movieRatingText) {
+		this.movieRatingText = movieRatingText;
+	}
+
+	public String getMovieRatingTextPrompt() {
+		return movieRatingTextPrompt;
+	}
+
+	public void setMovieRatingTextPrompt(String movieRatingTextPrompt) {
+		this.movieRatingTextPrompt = movieRatingTextPrompt;
+	}
+
+	public TextField getMovieGenreText() {
+		return movieGenreText;
+	}
+
+	public void setMovieGenreText(TextField movieGenreText) {
+		this.movieGenreText = movieGenreText;
+	}
+
+	public String getMovieGenreTextPrompt() {
+		return movieGenreTextPrompt;
+	}
+
+	public void setMovieGenreTextPrompt(String movieGenreTextPrompt) {
+		this.movieGenreTextPrompt = movieGenreTextPrompt;
+	}
+
+	public TextField getMovieReleaseDateText() {
+		return movieReleaseDateText;
+	}
+
+	public void setMovieReleaseDateText(TextField movieReleaseDateText) {
+		this.movieReleaseDateText = movieReleaseDateText;
+	}
+
+	public String getMovieReleaseDateTextPrompt() {
+		return movieReleaseDateTextPrompt;
+	}
+
+	public void setMovieReleaseDateTextPrompt(String movieReleaseDateTextPrompt) {
+		this.movieReleaseDateTextPrompt = movieReleaseDateTextPrompt;
+	}
+
+	public JButton getSubmitAddMovie() {
+		return submitAddMovie;
+	}
+
+	public void setSubmitAddMovie(JButton submitAddMovie) {
+		this.submitAddMovie = submitAddMovie;
+	}
+
+	public JTable getGetAllMovies() {
+		return getAllMovies;
+	}
+
+	public void setGetAllMovies(JTable getAllMovies) {
+		this.getAllMovies = getAllMovies;
+	}
+
+	public JButton getSubmitDeleteMovie() {
+		return submitDeleteMovie;
+	}
+
+	public void setSubmitDeleteMovie(JButton submitDeleteMovie) {
+		this.submitDeleteMovie = submitDeleteMovie;
+	}
+
+	public JTable getGetAllMembers() {
+		return getAllMembers;
+	}
+
+	public void setGetAllMembers(JTable getAllMembers) {
+		this.getAllMembers = getAllMembers;
+	}
+
+	public JButton getSubmitDeleteMember() {
+		return submitDeleteMember;
+	}
+
+	public void setSubmitDeleteMember(JButton submitDeleteMember) {
+		this.submitDeleteMember = submitDeleteMember;
+	}
+
+	public JTable getGetAllActors() {
+		return getAllActors;
+	}
+
+	public void setGetAllActors(JTable getAllActors) {
+		this.getAllActors = getAllActors;
+	}
+
+	public JButton getSubmitDeleteActor() {
+		return submitDeleteActor;
+	}
+
+	public void setSubmitDeleteActor(JButton submitDeleteActor) {
+		this.submitDeleteActor = submitDeleteActor;
+	}
+
+	public JTable getGetAllEmployeesTable() {
+		return getAllEmployeesTable;
+	}
+
+	public void setGetAllEmployeesTable(JTable getAllEmployeesTable) {
+		this.getAllEmployeesTable = getAllEmployeesTable;
+	}
+
+	public JButton getSubmitDeleteEmployee() {
+		return submitDeleteEmployee;
+	}
+
+	public void setSubmitDeleteEmployee(JButton submitDeleteEmployee) {
+		this.submitDeleteEmployee = submitDeleteEmployee;
+	}
+
+	public TextField getAddMemberEmail() {
+		return addMemberEmail;
+	}
+
+	public void setAddMemberEmail(TextField addMemberEmail) {
+		this.addMemberEmail = addMemberEmail;
+	}
+
+	public String getAddMemberEmailPrompt() {
+		return addMemberEmailPrompt;
+	}
+
+	public void setAddMemberEmailPrompt(String addMemberEmailPrompt) {
+		this.addMemberEmailPrompt = addMemberEmailPrompt;
+	}
+
+	public TextField getAddMemberPassword() {
+		return addMemberPassword;
+	}
+
+	public void setAddMemberPassword(TextField addMemberPassword) {
+		this.addMemberPassword = addMemberPassword;
+	}
+
+	public String getAddMemberPasswordPrompt() {
+		return addMemberPasswordPrompt;
+	}
+
+	public void setAddMemberPasswordPrompt(String addMemberPasswordPrompt) {
+		this.addMemberPasswordPrompt = addMemberPasswordPrompt;
+	}
+
+	public TextField getAddMemberFirstNameText() {
+		return addMemberFirstNameText;
+	}
+
+	public void setAddMemberFirstNameText(TextField addMemberFirstNameText) {
+		this.addMemberFirstNameText = addMemberFirstNameText;
+	}
+
+	public String getAddMemberFirstNameTextPrompt() {
+		return addMemberFirstNameTextPrompt;
+	}
+
+	public void setAddMemberFirstNameTextPrompt(String addMemberFirstNameTextPrompt) {
+		this.addMemberFirstNameTextPrompt = addMemberFirstNameTextPrompt;
+	}
+
+	public TextField getAddMemberLastNameText() {
+		return addMemberLastNameText;
+	}
+
+	public void setAddMemberLastNameText(TextField addMemberLastNameText) {
+		this.addMemberLastNameText = addMemberLastNameText;
+	}
+
+	public String getAddMemberLastNameTextPrompt() {
+		return addMemberLastNameTextPrompt;
+	}
+
+	public void setAddMemberLastNameTextPrompt(String addMemberLastNameTextPrompt) {
+		this.addMemberLastNameTextPrompt = addMemberLastNameTextPrompt;
+	}
+
+	public TextField getAddPhoneText() {
+		return addPhoneText;
+	}
+
+	public void setAddPhoneText(TextField addPhoneText) {
+		this.addPhoneText = addPhoneText;
+	}
+
+	public String getAddPhoneTextPrompt() {
+		return addPhoneTextPrompt;
+	}
+
+	public void setAddPhoneTextPrompt(String addPhoneTextPrompt) {
+		this.addPhoneTextPrompt = addPhoneTextPrompt;
+	}
+
+	public TextField getAddAddressText() {
+		return addAddressText;
+	}
+
+	public void setAddAddressText(TextField addAddressText) {
+		this.addAddressText = addAddressText;
+	}
+
+	public String getAddAddressTextPrompt() {
+		return addAddressTextPrompt;
+	}
+
+	public void setAddAddressTextPrompt(String addAddressTextPrompt) {
+		this.addAddressTextPrompt = addAddressTextPrompt;
+	}
+
+	public TextField getAddCityText() {
+		return addCityText;
+	}
+
+	public void setAddCityText(TextField addCityText) {
+		this.addCityText = addCityText;
+	}
+
+	public String getAddCityTextPrompt() {
+		return addCityTextPrompt;
+	}
+
+	public void setAddCityTextPrompt(String addCityTextPrompt) {
+		this.addCityTextPrompt = addCityTextPrompt;
+	}
+
+	public TextField getAddStateText() {
+		return addStateText;
+	}
+
+	public void setAddStateText(TextField addStateText) {
+		this.addStateText = addStateText;
+	}
+
+	public String getAddStateTextPrompt() {
+		return addStateTextPrompt;
+	}
+
+	public void setAddStateTextPrompt(String addStateTextPrompt) {
+		this.addStateTextPrompt = addStateTextPrompt;
+	}
+
+	public TextField getAddZipText() {
+		return addZipText;
+	}
+
+	public void setAddZipText(TextField addZipText) {
+		this.addZipText = addZipText;
+	}
+
+	public String getAddZipTextPrompt() {
+		return addZipTextPrompt;
+	}
+
+	public void setAddZipTextPrompt(String addZipTextPrompt) {
+		this.addZipTextPrompt = addZipTextPrompt;
+	}
+
+	public JButton getSubmitAddMember() {
+		return submitAddMember;
+	}
+
+	public void setSubmitAddMember(JButton submitAddMember) {
+		this.submitAddMember = submitAddMember;
+	}
+
+	public TextField getAddEmployeeEmail() {
+		return addEmployeeEmail;
+	}
+
+	public void setAddEmployeeEmail(TextField addEmployeeEmail) {
+		this.addEmployeeEmail = addEmployeeEmail;
+	}
+
+	public String getAddEmployeeEmailPrompt() {
+		return addEmployeeEmailPrompt;
+	}
+
+	public void setAddEmployeeEmailPrompt(String addEmployeeEmailPrompt) {
+		this.addEmployeeEmailPrompt = addEmployeeEmailPrompt;
+	}
+
+	public TextField getAddEmployeePassword() {
+		return addEmployeePassword;
+	}
+
+	public void setAddEmployeePassword(TextField addEmployeePassword) {
+		this.addEmployeePassword = addEmployeePassword;
+	}
+
+	public String getAddEmployeePasswordPrompt() {
+		return addEmployeePasswordPrompt;
+	}
+
+	public void setAddEmployeePasswordPrompt(String addEmployeePasswordPrompt) {
+		this.addEmployeePasswordPrompt = addEmployeePasswordPrompt;
+	}
+
+	public TextField getAddHireDateText() {
+		return addHireDateText;
+	}
+
+	public void setAddHireDateText(TextField addHireDateText) {
+		this.addHireDateText = addHireDateText;
+	}
+
+	public String getAddHireDateTextPrompt() {
+		return addHireDateTextPrompt;
+	}
+
+	public void setAddHireDateTextPrompt(String addHireDateTextPrompt) {
+		this.addHireDateTextPrompt = addHireDateTextPrompt;
+	}
+
+	public TextField getAddEmployeeFirstNameText() {
+		return addEmployeeFirstNameText;
+	}
+
+	public void setAddEmployeeFirstNameText(TextField addEmployeeFirstNameText) {
+		this.addEmployeeFirstNameText = addEmployeeFirstNameText;
+	}
+
+	public String getAddEmployeeFirstNameTextPrompt() {
+		return addEmployeeFirstNameTextPrompt;
+	}
+
+	public void setAddEmployeeFirstNameTextPrompt(String addEmployeeFirstNameTextPrompt) {
+		this.addEmployeeFirstNameTextPrompt = addEmployeeFirstNameTextPrompt;
+	}
+
+	public TextField getAddEmployeeLastNameText() {
+		return addEmployeeLastNameText;
+	}
+
+	public void setAddEmployeeLastNameText(TextField addEmployeeLastNameText) {
+		this.addEmployeeLastNameText = addEmployeeLastNameText;
+	}
+
+	public String getAddEmployeeLastNameTextPrompt() {
+		return addEmployeeLastNameTextPrompt;
+	}
+
+	public void setAddEmployeeLastNameTextPrompt(String addEmployeeLastNameTextPrompt) {
+		this.addEmployeeLastNameTextPrompt = addEmployeeLastNameTextPrompt;
+	}
+
+	public TextField getAddJobLocationText() {
+		return addJobLocationText;
+	}
+
+	public void setAddJobLocationText(TextField addJobLocationText) {
+		this.addJobLocationText = addJobLocationText;
+	}
+
+	public String getAddJobLocationTextPrompt() {
+		return addJobLocationTextPrompt;
+	}
+
+	public void setAddJobLocationTextPrompt(String addJobLocationTextPrompt) {
+		this.addJobLocationTextPrompt = addJobLocationTextPrompt;
+	}
+
+	public TextField getAddPositionText() {
+		return addPositionText;
+	}
+
+	public void setAddPositionText(TextField addPositionText) {
+		this.addPositionText = addPositionText;
+	}
+
+	public String getAddPositionTextPrompt() {
+		return addPositionTextPrompt;
+	}
+
+	public void setAddPositionTextPrompt(String addPositionTextPrompt) {
+		this.addPositionTextPrompt = addPositionTextPrompt;
+	}
+
+	public TextField getAddSalaryText() {
+		return addSalaryText;
+	}
+
+	public void setAddSalaryText(TextField addSalaryText) {
+		this.addSalaryText = addSalaryText;
+	}
+
+	public String getAddSalaryTextPrompt() {
+		return addSalaryTextPrompt;
+	}
+
+	public void setAddSalaryTextPrompt(String addSalaryTextPrompt) {
+		this.addSalaryTextPrompt = addSalaryTextPrompt;
+	}
+
+	public JButton getSubmitAddEmployee() {
+		return submitAddEmployee;
+	}
+
+	public void setSubmitAddEmployee(JButton submitAddEmployee) {
+		this.submitAddEmployee = submitAddEmployee;
+	}
+
+	public TextField getAddActorIDText() {
+		return addActorIDText;
+	}
+
+	public void setAddActorIDText(TextField addActorIDText) {
+		this.addActorIDText = addActorIDText;
+	}
+
+	public String getAddActorIDTextPrompt() {
+		return addActorIDTextPrompt;
+	}
+
+	public void setAddActorIDTextPrompt(String addActorIDTextPrompt) {
+		this.addActorIDTextPrompt = addActorIDTextPrompt;
+	}
+
+	public TextField getAddActorFirstNameText() {
+		return addActorFirstNameText;
+	}
+
+	public void setAddActorFirstNameText(TextField addActorFirstNameText) {
+		this.addActorFirstNameText = addActorFirstNameText;
+	}
+
+	public String getAddActorFirstNameTextPrompt() {
+		return addActorFirstNameTextPrompt;
+	}
+
+	public void setAddActorFirstNameTextPrompt(String addActorFirstNameTextPrompt) {
+		this.addActorFirstNameTextPrompt = addActorFirstNameTextPrompt;
+	}
+
+	public TextField getAddActorLastNameText() {
+		return addActorLastNameText;
+	}
+
+	public void setAddActorLastNameText(TextField addActorLastNameText) {
+		this.addActorLastNameText = addActorLastNameText;
+	}
+
+	public String getAddActorLastNameTextPrompt() {
+		return addActorLastNameTextPrompt;
+	}
+
+	public void setAddActorLastNameTextPrompt(String addActorLastNameTextPrompt) {
+		this.addActorLastNameTextPrompt = addActorLastNameTextPrompt;
+	}
+
+	public JButton getSubmitAddActor() {
+		return submitAddActor;
+	}
+
+	public void setSubmitAddActor(JButton submitAddActor) {
+		this.submitAddActor = submitAddActor;
+	}
+
+	public JButton getUpdateEmail() {
+		return updateEmail;
+	}
+
+	public void setUpdateEmail(JButton updateEmail) {
+		this.updateEmail = updateEmail;
+	}
+
+	public JButton getUpdatePassword() {
+		return updatePassword;
+	}
+
+	public void setUpdatePassword(JButton updatePassword) {
+		this.updatePassword = updatePassword;
+	}
+
+	public TextField getEmailText() {
+		return emailText;
+	}
+
+	public void setEmailText(TextField emailText) {
+		this.emailText = emailText;
+	}
+
+	public String getEmailTextPrompt() {
+		return emailTextPrompt;
+	}
+
+	public void setEmailTextPrompt(String emailTextPrompt) {
+		this.emailTextPrompt = emailTextPrompt;
+	}
+
+	public JButton getSubmitEmail() {
+		return submitEmail;
+	}
+
+	public void setSubmitEmail(JButton submitEmail) {
+		this.submitEmail = submitEmail;
+	}
+
+	public TextField getPasswordText() {
+		return passwordText;
+	}
+
+	public void setPasswordText(TextField passwordText) {
+		this.passwordText = passwordText;
+	}
+
+	public String getPasswordTextPrompt() {
+		return passwordTextPrompt;
+	}
+
+	public void setPasswordTextPrompt(String passwordTextPrompt) {
+		this.passwordTextPrompt = passwordTextPrompt;
+	}
+
+	public JButton getSubmitPassword() {
+		return submitPassword;
+	}
+
+	public void setSubmitPassword(JButton submitPassword) {
+		this.submitPassword = submitPassword;
+	}
+
+	public String getEmployeeEmail() {
+		return employeeEmail;
+	}
+
+	public void setEmployeeEmail(String employeeEmail) {
+		this.employeeEmail = employeeEmail;
+	}
+
+	public String getEmployeePassword() {
+		return employeePassword;
+	}
+
+	public void setEmployeePassword(String employeePassword) {
+		this.employeePassword = employeePassword;
+	}
+
+	public CEOFunctions getCeoFunctions() {
+		return ceoFunctions;
+	}
+
+	public void setCeoFunctions(CEOFunctions ceoFunctions) {
+		this.ceoFunctions = ceoFunctions;
+	}
+
+	public JButton getHomeButton() {
+		return homeButton;
+	}
+
+	public void setHomeButton(JButton homeButton) {
+		this.homeButton = homeButton;
+	}
+
+	public JLabel getRestartLabel() {
+		return restartLabel;
+	}
+
+	public void setRestartLabel(JLabel restartLabel) {
+		this.restartLabel = restartLabel;
+	}
+
+	public GridBagConstraints getC() {
+		return c;
+	}
+
+	public void setC(GridBagConstraints c) {
+		this.c = c;
+	}
+
+	public JButton getAddActorButton() {
+		return addActorButton;
+	}
+
+	public void setAddActorButton(JButton addActorButton) {
+		this.addActorButton = addActorButton;
+	}
+
+	public JButton getDeleteActorButton() {
+		return deleteActorButton;
+	}
+
+	public void setDeleteActorButton(JButton deleteActorButton) {
+		this.deleteActorButton = deleteActorButton;
+	}
+
+	public ActionListener getOnClick() {
+		return onClick;
+	}
+
+	public void setOnClick(ActionListener onClick) {
+		this.onClick = onClick;
+	}
+
+	public FocusListener getOnFocus() {
+		return onFocus;
+	}
+
+	public void setOnFocus(FocusListener onFocus) {
+		this.onFocus = onFocus;
 	}
 }

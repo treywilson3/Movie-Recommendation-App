@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import Model.EmployeeFunctions;
+import Controller.EmployeeFunctions;
 
 /**
  * @author Trey Employee Panel has all buttons that an amployee will need.

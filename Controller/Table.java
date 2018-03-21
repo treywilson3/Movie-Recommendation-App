@@ -1,4 +1,4 @@
-package Model;
+package Controller;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
